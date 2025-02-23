@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Login to Octopus Deploy
+        uses: OctopusDeploy/login@v1
+        with:
+          server: https://mattc.octopus.app
+          service_account_id: bfdda2e5-4b70-4575-922c-075a0babedb1
+
+      - name: Push frontend build information
+        uses: OctopusSolutionsEngineering/push-build-information-action@v3
+        with:
+          packages: frontend
+          version: "0.0.${{ github.run_number }}"
+          paths: frontend/**/*
+
+      - name: Push backend build information
+        uses: OctopusSolutionsEngineering/push-build-information-action@v3
+        with:
+          packages: frontend
+          version: "0.0.${{ github.run_number }}"
+          paths: backend/**/*
