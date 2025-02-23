@@ -33,6 +33,7 @@ jobs:
       - name: Push frontend build information
         uses: OctopusSolutionsEngineering/push-build-information-action@main
         with:
+          space: Documentation
           packages: frontend
           version: "0.0.${{ github.run_number }}"
           paths: frontend/**/*
@@ -40,6 +41,7 @@ jobs:
       - name: Push backend build information
         uses: OctopusSolutionsEngineering/push-build-information-action@main
         with:
+          space: Documentation
           packages: frontend
           version: "0.0.${{ github.run_number }}"
           paths: backend/**/*
