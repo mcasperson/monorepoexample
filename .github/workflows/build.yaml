@@ -28,14 +28,14 @@ jobs:
           service_account_id: bfdda2e5-4b70-4575-922c-075a0babedb1
 
       - name: Push frontend build information
-        uses: OctopusSolutionsEngineering/push-build-information-action
+        uses: OctopusSolutionsEngineering/push-build-information-action@main
         with:
           packages: frontend
           version: "0.0.${{ github.run_number }}"
           paths: frontend/**/*
 
       - name: Push backend build information
-        uses: OctopusSolutionsEngineering/push-build-information-action
+        uses: OctopusSolutionsEngineering/push-build-information-action@main
         with:
           packages: frontend
           version: "0.0.${{ github.run_number }}"
